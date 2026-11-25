@@ -1,0 +1,282 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #f3f4f6;
+  background: #16161d;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: #16161d;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.starter-page {
+  display: flex;
+  flex-direction: column;
+  width: min(1126px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  border-right: 1px solid #292932;
+  border-left: 1px solid #292932;
+  background: #16161d;
+}
+
+.starter-page main {
+  flex: 1;
+}
+
+.hero-section {
+  display: flex;
+  min-height: 442px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 38px 24px 48px;
+  text-align: center;
+}
+
+.hero-graphic {
+  position: relative;
+  width: 170px;
+  height: 179px;
+}
+
+.hero-base,
+.hero-react,
+.hero-vite {
+  position: absolute;
+  inset-inline: 0;
+  margin: 0 auto;
+}
+
+.hero-base {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 170px;
+  height: 179px;
+}
+
+.hero-react,
+.hero-vite {
+  width: auto;
+}
+
+.hero-react {
+  z-index: 1;
+  top: 34px;
+  height: 28px;
+  transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+    scale(1.4);
+}
+
+.hero-vite {
+  z-index: 0;
+  top: 107px;
+  height: 26px;
+  transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+    scale(0.8);
+}
+
+.hero-copy h1 {
+  margin: 0 0 10px;
+  color: #f4f4f5;
+  font-size: clamp(32px, 4vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.hero-copy p {
+  margin: 0;
+  color: #a1a1aa;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.hero-copy code {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #25252e;
+  color: #dedee4;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.counter-button {
+  padding: 7px 12px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: rgba(170, 59, 255, 0.14);
+  color: #c084fc;
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 16px;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.counter-button:hover {
+  border-color: rgba(192, 132, 252, 0.55);
+  background: rgba(170, 59, 255, 0.2);
+}
+
+.counter-button:focus-visible,
+.resource-links a:focus-visible {
+  outline: 2px solid #c084fc;
+  outline-offset: 3px;
+}
+
+.resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid #292932;
+  text-align: center;
+}
+
+.resource-card {
+  min-width: 0;
+  padding: 30px 24px 32px;
+}
+
+.resource-card + .resource-card {
+  border-left: 1px solid #292932;
+}
+
+.resource-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 0 auto 16px;
+}
+
+.resource-card h2 {
+  margin: 0 0 8px;
+  color: #f0f0f3;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.resource-card p {
+  margin: 0;
+  color: #a1a1aa;
+  font-size: 16px;
+}
+
+.resource-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resource-links a {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #25252e;
+  color: #dedee4;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.resource-links a:hover {
+  background: #30303b;
+}
+
+.vite-link-logo {
+  width: auto;
+  height: 18px;
+}
+
+.react-link-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  filter: invert(1) brightness(1.7);
+}
+
+.page-spacer {
+  height: 48px;
+  border-top: 1px solid #292932;
+}
+
+@media (max-width: 700px) {
+  .hero-section {
+    min-height: 420px;
+    gap: 23px;
+    padding: 34px 20px 42px;
+  }
+
+  .hero-copy p {
+    font-size: 14px;
+  }
+
+  .resources {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-card {
+    padding: 28px 20px;
+  }
+
+  .resource-card + .resource-card {
+    border-top: 1px solid #292932;
+    border-left: 0;
+  }
+
+  .resource-links {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  .community-card .resource-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-copy p {
+    font-size: 13px;
+  }
+
+  .resource-card {
+    padding-inline: 14px;
+  }
+
+  .resource-links a {
+    gap: 5px;
+    padding-inline: 5px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
