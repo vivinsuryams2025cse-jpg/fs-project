@@ -1,0 +1,170 @@
+### SkillBridge REST API Test Suite (IntelliJ IDEA HTTP Client)
+@baseUrl = http://localhost:8080
+
+### 1. Register Student A (Alice)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Alice Johnson",
+  "email": "alice@university.edu",
+  "password": "Password@123",
+  "collegeName": "MIT",
+  "department": "Computer Science",
+  "yearOfStudy": 3,
+  "bio": "Backend developer teaching Java, eager to learn Python."
+}
+
+### 2. Register Student B (Bob)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Bob Williams",
+  "email": "bob@university.edu",
+  "password": "Password@123",
+  "collegeName": "MIT",
+  "department": "Data Science",
+  "yearOfStudy": 2,
+  "bio": "Data science student teaching Python, looking to learn Java."
+}
+
+### 3. Login as Alice
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "alice@university.edu",
+  "password": "Password@123"
+}
+
+> {% client.global.set("aliceToken", response.body.data.accessToken); %}
+
+### 4. Login as Bob
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "bob@university.edu",
+  "password": "Password@123"
+}
+
+> {% client.global.set("bobToken", response.body.data.accessToken); %}
+
+### 5. Login as Admin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@skillbridge.com",
+  "password": "Admin@12345"
+}
+
+> {% client.global.set("adminToken", response.body.data.accessToken); %}
+
+### 6. Get Alice's Profile
+GET {{baseUrl}}/api/students/me
+Authorization: Bearer {{aliceToken}}
+
+### 7. Update Alice's Profile
+PUT {{baseUrl}}/api/students/me
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "fullName": "Alice M. Johnson",
+  "collegeName": "MIT",
+  "department": "Computer Science & AI",
+  "yearOfStudy": 3,
+  "bio": "Spring Boot & Java mentor."
+}
+
+### 8. Alice Adds TEACH Skill (Java)
+POST {{baseUrl}}/api/skills
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "skillName": "Java",
+  "skillType": "TEACH"
+}
+
+### 9. Alice Adds LEARN Skill (Python)
+POST {{baseUrl}}/api/skills
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "skillName": "Python",
+  "skillType": "LEARN"
+}
+
+### 10. Bob Adds TEACH Skill (Python)
+POST {{baseUrl}}/api/skills
+Authorization: Bearer {{bobToken}}
+Content-Type: application/json
+
+{
+  "skillName": "Python",
+  "skillType": "TEACH"
+}
+
+### 11. Bob Adds LEARN Skill (Java)
+POST {{baseUrl}}/api/skills
+Authorization: Bearer {{bobToken}}
+Content-Type: application/json
+
+{
+  "skillName": "Java",
+  "skillType": "LEARN"
+}
+
+### 12. Get Mutual Matches for Alice
+GET {{baseUrl}}/api/matches
+Authorization: Bearer {{aliceToken}}
+
+### 13. Search Mutual Matches with Filters
+GET {{baseUrl}}/api/matches/search?skillName=Python&college=MIT
+Authorization: Bearer {{aliceToken}}
+
+### 14. Alice Sends Exchange Request to Bob (Assuming Bob's ID = 3)
+POST {{baseUrl}}/api/requests
+Authorization: Bearer {{aliceToken}}
+Content-Type: application/json
+
+{
+  "receiverId": 3,
+  "message": "Hi Bob! I can teach you Java & Spring Boot in exchange for Python."
+}
+
+### 15. Bob Views Received Requests
+GET {{baseUrl}}/api/requests/received
+Authorization: Bearer {{bobToken}}
+
+### 16. Bob Accepts Exchange Request (Assuming Request ID = 1)
+PATCH {{baseUrl}}/api/requests/1/accept
+Authorization: Bearer {{bobToken}}
+
+### 17. View Active Connections
+GET {{baseUrl}}/api/connections
+Authorization: Bearer {{aliceToken}}
+
+### 18. View Unread Notifications
+GET {{baseUrl}}/api/notifications/unread
+Authorization: Bearer {{aliceToken}}
+
+### 19. Mark All Notifications as Read
+PATCH {{baseUrl}}/api/notifications/read-all
+Authorization: Bearer {{aliceToken}}
+
+### 20. Admin Dashboard Metrics
+GET {{baseUrl}}/api/admin/dashboard
+Authorization: Bearer {{adminToken}}
+
+### 21. Admin List All Students
+GET {{baseUrl}}/api/admin/students
+Authorization: Bearer {{adminToken}}
+
+### 22. Logout Alice
+POST {{baseUrl}}/api/auth/logout
+Authorization: Bearer {{aliceToken}}
